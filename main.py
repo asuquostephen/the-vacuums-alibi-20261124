@@ -12,7 +12,16 @@ LINE = "My lidar saw the spot. It also saw what your toddler did there in March.
 MAX_CHARS = 200
 
 
+def check_line() -> int:
+    """Return the character count of the line."""
+    return len(LINE)
+
+
 def main() -> int:
+    if "--check" in sys.argv[1:]:
+        chars = check_line()
+        print(f"{chars} characters")
+        return 0 if 1 <= chars <= MAX_CHARS and LINE.strip() else 1
     data = LINE.encode("utf-8")
     if not (1 <= len(LINE) <= MAX_CHARS):
         print(f"line must be 1-{MAX_CHARS} characters, got {len(LINE)}", file=sys.stderr)
